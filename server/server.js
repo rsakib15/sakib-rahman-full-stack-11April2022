@@ -17,8 +17,11 @@ if (process.env.NODE_ENV === 'development') {
 
 const authRouter = require('./routes/auth.routes');
 const restaurantRouter = require('./routes/restaurant.routes');
+const collectionRouter = require('./routes/collection.routes');
 app.use('/api/', authRouter);
 app.use('/api/', restaurantRouter);
+app.use('/api/', collectionRouter);
+
 app.use('', (req, res) => {
     res.send("API is running");
 });
