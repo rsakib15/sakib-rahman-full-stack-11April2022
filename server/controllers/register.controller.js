@@ -5,8 +5,8 @@ exports.registerController = async(req, res) => {
     const { name, email, password } =  req.body;
     if(name && email && password){
         try {
-            const  data  =  await client.query(`SELECT * FROM users WHERE email= $1;`, [email]);
-            const  arr  =  data.rows;
+            const data = await client.query(`SELECT * FROM users WHERE email= $1;`, [email]);
+            const arr = data.rows;
             if (arr.length  !=  0) {
                 return  res.status(400).json({
                     success: false,
