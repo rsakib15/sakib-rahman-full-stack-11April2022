@@ -112,3 +112,32 @@ exports.restaurantOpenTimeController = async(req, res) => {
         });
     }
 }
+
+exports.restaurantNameTimeController = async(req, res) => {
+    const {name, time} = req.params;
+    if(name && time){
+        const  data  =  await client.query(`SELECT restaurants.id, restaurants.name, hours.day, 
+            hours.opening_time, hours.closing_time FROM  restaurants,hours WHERE hours.restaurant_id=restaurants.id 
+            AND hours.opening_time = $1 AND restaurants.name = $2`, [time, name]
+        );
+        const  arr  =  data.rows;
+        if (arr.length  !=  0) {
+            return  res.status(200).json({
+                success: true,
+                data: processQueryData(arr)
+            });
+        }
+        else{
+            return res.status(404).json({
+                success: false,
+                msg: "No Restaurant found in this opening time"
+            });
+        }
+    }
+    else{
+        return res.status(400).json({
+            success: false,
+            msg: "Please fill all the fields"
+        });
+    }
+}
