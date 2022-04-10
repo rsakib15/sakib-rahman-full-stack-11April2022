@@ -57,7 +57,9 @@ exports.restaurantController = async(req, res) => {
 exports.restaurantSearchController = async(req, res) => {
     const {name} = req.params;
     if (name) {
-        const data = await client.query(`SELECT * FROM restaurants WHERE name = $1`, [name]);
+        const data = await client.query(`SELECT restaurants.id, restaurants.name, hours.day, 
+        hours.opening_time, hours.closing_time FROM restaurants,hours WHERE 
+        hours.restaurant_id=restaurants.id AND restaurants.name = $1;`, [name]);
         const arr = data.rows;
         if (arr.length  !=  0) {
             return  res.status(200).json({
