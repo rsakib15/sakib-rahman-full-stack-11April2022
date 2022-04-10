@@ -4,6 +4,6 @@ const {restaurantController, restaurantSearchController, restaurantOpenTimeContr
 router.get('/restaurants',restaurantController);
 router.get('/restaurants/:id',restaurantController);
 router.get('/search/:name',restaurantSearchController);
-router.get('/time/:time',restaurantOpenTimeController);
+router.get('/open/:time',restaurantOpenTimeController);
 module.exports = router;
 

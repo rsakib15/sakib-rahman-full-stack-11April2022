@@ -87,12 +87,15 @@ exports.restaurantOpenTimeController = async(req, res) => {
     const {time} = req.params;
     console.log(time);
     if(time){
-        const  data  =  await client.query(`SELECT * FROM restaurants WHERE hours_json ->> 'opening_time' = '11:30 AM'`);
+        const  data  =  await client.query(`SELECT restaurants.id, restaurants.name, hours.day, 
+            hours.opening_time, hours.closing_time FROM  restaurants,hours WHERE hours.restaurant_id=restaurants.id 
+            AND hours.opening_time = $1`, [time]
+        );
         const  arr  =  data.rows;
         if (arr.length  !=  0) {
             return  res.status(200).json({
                 success: true,
-                data: arr
+                data: processQueryData(arr)
             });
         }
         else{
