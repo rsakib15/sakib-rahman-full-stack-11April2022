@@ -1,13 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
 const SearchBox = ({ onChange, name }) => {
-    const [text, setText] = useState("");
-
-    const search = (event) => {
-        setText(event.target.value);
-        onChange(text);
-    }
-
     return (
         <div className="flex justify-center">
             <div className="mb-3 xl:w-96">

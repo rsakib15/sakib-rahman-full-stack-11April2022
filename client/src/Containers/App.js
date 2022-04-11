@@ -58,7 +58,7 @@ const App = (props) => {
 		try {
 			setIsLoading(true);
 			setName("");
-			await axios.get(`${BASEURL}/api/restaurants/open/${time}`)
+			await axios.get(`${BASEURL}/api/open/${time}`)
 				.then(res => {
 					if (res?.status === 200) {
 						setIsLoading(false);
@@ -104,10 +104,15 @@ const App = (props) => {
 
 	const handleSearch = () => {
 		console.log("handle search")
-		if(name && !time) getDataByName();
-		else if(!name && time) getDataByTime();
-		else if(name && time) getDataByNameAndTime();
-		else getAllData();
+		console.log(time);
+		console.log(name);
+		
+		if(name && !time && name.trim().length > 0) getDataByName();
+		else if(!name && time && time.trim().length > 0) getDataByTime();
+		else if(name && time && name.trim().length > 0 && time.trim().length > 0) getDataByNameAndTime();
+		else{
+			handleReset()
+		}
 	};
 
 	const handleReset = () => {
@@ -120,10 +125,9 @@ const App = (props) => {
 		setName(e);
 	};
 	const handleTimeChange = (e) => {
+		console.log("handleTimeChange: ",e);
 		setTime(e);
 	};
-
-
 
 	return(
 		<div>

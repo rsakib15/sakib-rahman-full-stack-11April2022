@@ -88,11 +88,11 @@ exports.restaurantOpenTimeController = async(req, res) => {
     const {time} = req.params;
     console.log(time);
     if(time){
-        const  data  =  await client.query(`SELECT restaurants.id, restaurants.name, hours.day, 
+        const data =  await client.query(`SELECT restaurants.id, restaurants.name, hours.day, 
             hours.opening_time, hours.closing_time FROM  restaurants,hours WHERE hours.restaurant_id=restaurants.id 
             AND hours.opening_time = $1`, [time]
         );
-        const  arr  =  data.rows;
+        const arr =  data.rows;
         if (arr.length  !=  0) {
             return  res.status(200).json({
                 success: true,
@@ -100,9 +100,10 @@ exports.restaurantOpenTimeController = async(req, res) => {
             });
         }
         else{
-            return res.status(404).json({
-                success: false,
-                msg: "No Restaurant found in this opening time"
+            return res.status(200).json({
+                success: true,
+                msg: "No Restaurant found in this opening time",
+                data: []
             });
         }
     }
@@ -129,9 +130,10 @@ exports.restaurantNameTimeController = async(req, res) => {
             });
         }
         else{
-            return res.status(404).json({
-                success: false,
-                msg: "No Restaurant found in this opening time"
+            return res.status(200).json({
+                success: true,
+                msg: "No Restaurant found in this name and opening time",
+                data: []
             });
         }
     }

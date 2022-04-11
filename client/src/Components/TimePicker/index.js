@@ -1,6 +1,46 @@
+import React, { useEffect, useState } from 'react';
+
+const TimePicker = ({time, onChange}) =>{
+    const [hour, setHour] = useState("");
+    const [minute, setMinute] = useState("");
+    const [ap, setAP] = useState("");
 
 
-const TimePicker = (props) =>{
+    useEffect(() => {
+        console.log("oyyy", time);
+        if(time){
+            const l = time.split(":");
+            setHour(l[0]);
+            setMinute(l[1].split(" ")[0]);
+            setAP(l[1].split(" ")[1]);
+        }
+        else{
+            setHour("");
+            setMinute("");
+            setAP("");
+        }
+    }, [time]);
+
+
+    const handleChange = (e) => {
+        if(e.target.id=="hour"){
+            console.log("hour", e.target.value);
+            onChange(`${e.target.value}:${minute} ${ap}`);
+            setHour(e.target.value);
+        }
+        else if(e.target.id=="minute"){
+            console.log("minute", e.target.value);
+            setMinute(e.target.value);
+            onChange(`${hour}:${e.target.value} ${ap}`);
+        }
+        else if(e.target.id=="ap"){
+            console.log("ap", e.target.value);
+            setAP(e.target.value);
+            onChange(`${hour}:${minute} ${e.target.value}`);
+        }
+    };
+
+
     return (
         <div className="container mx-auto justify-center">
             <div className="flex flex-wrap mb-2 w-full">
@@ -15,8 +55,8 @@ const TimePicker = (props) =>{
                 </div>
             </div>
             <div className="inline-flex text-lg border rounded-md shadow-lg w-full justify-center">
-                <select name="hour" id="" className="outline-none appearance-none bg-transparent text-center px-4 py-2">
-                    <option value="">Hour</option>
+                <select name="hour" id="hour" className="outline-none appearance-none bg-transparent text-center px-4 py-2" onChange={handleChange} value={hour}>
+                    <option value="0">Hour</option>
                     <option value="01">01</option>
                     <option value="02">02</option>
                     <option value="03">03</option>
@@ -31,8 +71,8 @@ const TimePicker = (props) =>{
                     <option value="12">12</option>
                 </select>
                 <span className="px-4 py-2">:</span>
-                <select name="" id="" className="outline-none appearance-none bg-transparent text-center px-4 py-2">
-                    <option value="">Minute</option>
+                <select name="minute" id="minute" className="outline-none appearance-none bg-transparent text-center px-4 py-2" onChange={handleChange} value={minute}>
+                    <option value="0">Minute</option>
                     <option value="00">00</option>
                     <option value="05">05</option>
                     <option value="10">10</option>
@@ -46,8 +86,8 @@ const TimePicker = (props) =>{
                     <option value="50">50</option>
                     <option value="55">55</option>
                 </select>
-                <select name="" id="" className="outline-none appearance-none bg-gray-100 text-center px-4 py-0">
-                    <option value="">AM/PM</option>
+                <select name="ap" id="ap" className="outline-none appearance-none text-center px-4 py-0" onChange={handleChange} value={ap}>
+                    <option value="0">AM/PM</option>
                     <option value="AM">AM</option>
                     <option value="PM">PM</option>
                 </select>
