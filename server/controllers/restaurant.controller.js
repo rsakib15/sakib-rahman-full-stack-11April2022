@@ -68,9 +68,10 @@ exports.restaurantSearchController = async(req, res) => {
             });
         }
         else{
-            return res.status(404).json({
-                success: false,
-                msg: "Restaurant not found"
+            return res.status(200).json({
+                success: true,
+                msg: "No Restaurant found",
+                data: []
             });
         }
         
