@@ -40,7 +40,7 @@ const App = (props) => {
 		try {
 			setIsLoading(true);
 			setTime("");
-			await axios.get(`${BASEURL}/api/restaurants/search/${name}`)
+			await axios.get(`${BASEURL}/api/search/${name}`)
 				.then(res => {
 					if (res?.status === 200) {
 						setIsLoading(false);
@@ -75,7 +75,7 @@ const App = (props) => {
 	const getDataByNameAndTime = async () => {
 		try {
 			setIsLoading(true);
-			await axios.get(`${BASEURL}/api/restaurants/search/${name}/${time}`)
+			await axios.get(`${BASEURL}/api/search/${name}/${time}`)
 				.then(res => {
 					if (res?.status === 200) {
 						setIsLoading(false);
@@ -119,6 +119,9 @@ const App = (props) => {
 	const handleSearchBoxChange = (e) => {
 		setName(e);
 	};
+	const handleTimeChange = (e) => {
+		setTime(e);
+	};
 
 
 
@@ -129,8 +132,8 @@ const App = (props) => {
 				<div className="flex flex-wrap">
 					<div className="w-full lg:w-3/4">
 						{
-							isLoading ? <div className="text-center">Loading...</div> :
-							<RestaurantCard restaurants={currentPosts} />
+							isLoading ? <div className="text-center">Loading...</div> : restaurants.length > 0 ?
+							<RestaurantCard restaurants={currentPosts} /> : <div className="text-center">No results found</div>
 						}
 						<Pagination
 							postsPerPage={postsPerPage}
@@ -141,8 +144,8 @@ const App = (props) => {
 						/>
 					</div>
 					<div className="w-full lg:w-1/4">
-						<SearchBox name={name} onChange={(e, value) => handleSearchBoxChange(value)}/>
-						<TimePicker time={time}/>
+						<SearchBox name={name} onChange={handleSearchBoxChange}/>
+						<TimePicker time={time} onChange={handleTimeChange}/>
 						<div className="flex-auto flex space-x-3 mt-5">
 							<button className="lg:w-1/2 flex items-center justify-center w-9 h-9 rounded-md bg-black text-white" onClick={()=>handleSearch()}>SEARCH</button>
 							<button className="lg:w-1/2 flex items-center justify-center w-9 h-9 rounded-md bg-slate-100 text-black" onClick={()=>handleReset()}>RESET</button>
