@@ -1,12 +1,20 @@
-import { render } from 'express/lib/response';
-import React from 'react';
-import { Routes, Route } from "react-router-dom";
-import App from './App';
+import { BrowserRouter,Routes, Route } from 'react-router-dom';
+import App from './Containers/App';
+import Login from './Containers/Login';
+import Registration from './Containers/Registration';
 
 const MainApp = () => {
-    <Routes>
-        <Route path="" component={App}/>
-    </Routes>
-};
+  return (
+    <div className="App">
+        <BrowserRouter>
+            <Routes>
+                <Route path="/" element={<App />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/registration" element={<Registration />}/>
+            </Routes>
+        </BrowserRouter>
+    </div>
+  );
+}
 
 export default MainApp;
