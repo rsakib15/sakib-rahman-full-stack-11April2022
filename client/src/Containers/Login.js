@@ -14,15 +14,27 @@ const Login = ({handleLoggedIn}) => {
         }
     }, []);
 
+    const emailValidation = (email) => {
+        const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(String(email).toLowerCase());
+    }
+
     const loginUser =() => {
         if(email === "" || password === ""){
             alert("Please enter email and password");
             return;
-        }  
+        }
+
+        if(!emailValidation(email)){
+            alert("Please enter valid email");
+            return;
+        } 
+         
         let data = {
-            'email': email,
+            'email': String(email).toLowerCase(),
             'password': password,
         };
+
         try{
             axios.post(`${BASEURL}/api/login`, data).then(res => {
                 if (res.status === 200) {
@@ -33,11 +45,10 @@ const Login = ({handleLoggedIn}) => {
                 } else {
                     alert('Something went wrong');
                 }
-            }).catch(errr => alert('Server Error'));
+            }).catch(errr => alert('Something went wrong'));
         }
         catch(err){
-            alert('Server Error');
-            
+            alert('Something went wrong');
         }
     };
 
@@ -50,7 +61,7 @@ const Login = ({handleLoggedIn}) => {
     };
 
     return (
-        <div className="flex flex-col items-center justify-center w-screen h-screen bg-gray-200 text-gray-700">
+        <div className="flex flex-col items-center pt-10 w-screen h-screen bg-gray-200 text-gray-700">
             <div className="flex flex-col bg-white rounded shadow-lg p-12 mt-12">
                 <label className="font-semibold text-xs" htmlFor="usernameField">Email</label>
                 <input className="flex items-center h-12 px-4 w-64 bg-gray-200 mt-2 rounded focus:outline-none focus:ring-2" type="text" onChange={(e) => handleEmailChange(e.target.value)}/>
