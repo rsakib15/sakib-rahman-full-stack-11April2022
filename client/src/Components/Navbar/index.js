@@ -11,7 +11,7 @@ const navigation = [
 ]
 
 function classNames(...classes) {
-  return classes.filter(Boolean).join(' ')
+	return classes.filter(Boolean).join(' ')
 }
 
 const handleLogout = () => {
@@ -23,7 +23,7 @@ const handleLogout = () => {
 export default function Navbar(props) {
 	console.log(window.location.pathname);
   	return (
-	  	<div className='bg-gray-800 w-full'>
+	  	<div className='bg-gray-800 w-full '>
         	<div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 ">
     			<div className="relative flex items-center justify-between h-16">
               		<div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
