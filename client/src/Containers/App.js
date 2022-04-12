@@ -131,7 +131,7 @@ const App = (props) => {
 
 	return(
 		<div>
-			<div className="mcontainer">
+			<div className="mcontainer ">
 				<div className="flex flex-wrap">
 					<div className="w-full lg:w-3/4">
 						{
