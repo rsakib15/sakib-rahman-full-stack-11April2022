@@ -136,6 +136,9 @@ const App = (props) => {
 					{
 						isLoading ? <div className="w-full lg:w-3/4"><div className="text-center">Loading...</div></div> : restaurants.length > 0 ?
 						<div className="w-full lg:w-3/4">
+							<div>
+								<h2 class="mb-4 text-2xl text-gray-600 font-bold md:text-3xl">Restaurants</h2>
+							</div>
 							<RestaurantCard restaurants={currentPosts} /> 
 							<Pagination
 							postsPerPage={postsPerPage}
