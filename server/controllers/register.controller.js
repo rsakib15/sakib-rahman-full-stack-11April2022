@@ -8,7 +8,7 @@ exports.registerController = async(req, res) => {
             const data = await client.query(`SELECT * FROM users WHERE email= $1;`, [email]);
             const arr = data.rows;
             if (arr.length  !=  0) {
-                return  res.status(400).json({
+                return  res.status(200).json({
                     success: false,
                     msg: "Email already exists"
                 });
