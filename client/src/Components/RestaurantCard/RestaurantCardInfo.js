@@ -6,7 +6,26 @@ const RestaurantCardInfo = ({data}) => {
 	var daylist = ["Sun","Mon","Tues","Weds","Thurs","Fri","Sat"];
 	var today = new Date();
 	var res_hours = data.hours;
-	var res_hours_today = _.groupBy(res_hours,'opening_time');
+	var res_hours_today = _.groupBy(res_hours,'opening_time')
+	var result = _.groupBy(res_hours,'opening_time')
+	console.log(result)
+
+
+	var keys = Object.keys(result);
+	var res = [];
+
+	for(var i=0;i<keys.length;i++){
+		var d = []
+		for(var j=0;j<result[keys[i]].length;j++){
+			d.push(result[keys[i]][j].day);
+		}
+		res.push({
+			opening_time: keys[i],
+			closing_time: result[keys[i]][0].closing_time,
+			days: d
+		})
+	}
+	console.log(res);
 
 
     return(
@@ -37,10 +56,10 @@ const RestaurantCardInfo = ({data}) => {
 								</thead>
 								<tbody>
 									{
-										data.hours.map((item, index) => {
+										res.map((item, index) => {
 											return (
 											<tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700" key={index}>
-												<td scope="row" className="px-14 py-1 font-medium text-gray-900 dark:text-white whitespace-nowrap">{item.day}</td>
+												<td scope="row" className="px-14 py-1 font-medium text-gray-900 dark:text-white whitespace-nowrap">{item.days.length>1 ? item.days[0] + " - " + item.days[item.days.length-1] : item.days[0]}</td>
 												<td className="px-14 py-1">{item.opening_time}</td>
 												<td className="px-14 py-1">{item.closing_time}</td>
 											</tr>
