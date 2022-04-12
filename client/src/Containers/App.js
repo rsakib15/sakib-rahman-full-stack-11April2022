@@ -133,19 +133,19 @@ const App = (props) => {
 		<div>
 			<div className="mcontainer ">
 				<div className="flex flex-wrap">
-					<div className="w-full lg:w-3/4">
-						{
-							isLoading ? <div className="text-center">Loading...</div> : restaurants.length > 0 ?
-							<RestaurantCard restaurants={currentPosts} /> : <div className="text-center">No results found</div>
-						}
-						<Pagination
+					{
+						isLoading ? <div className="w-full lg:w-3/4"><div className="text-center">Loading...</div></div> : restaurants.length > 0 ?
+						<div className="w-full lg:w-3/4">
+							<RestaurantCard restaurants={currentPosts} /> 
+							<Pagination
 							postsPerPage={postsPerPage}
 							totalPosts={restaurants.length}
 							paginateBack={paginateBack}
 							paginateFront={paginateFront}
 							currentPage={currentPage}
-						/>
-					</div>
+							/>
+						</div>: <div className="w-full lg:w-3/4"><div className="text-center">No results found</div></div>
+					}
 					<div className="w-full lg:w-1/4">
 						<SearchBox name={name} onChange={handleSearchBoxChange}/>
 						<TimePicker time={time} onChange={handleTimeChange}/>
