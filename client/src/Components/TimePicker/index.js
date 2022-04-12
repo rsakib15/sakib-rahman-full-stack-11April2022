@@ -7,7 +7,6 @@ const TimePicker = ({time, onChange}) =>{
 
 
     useEffect(() => {
-        console.log("oyyy", time);
         if(time){
             const l = time.split(":");
             setHour(l[0]);
