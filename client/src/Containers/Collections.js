@@ -1,42 +1,164 @@
 import React, { useEffect, useState } from 'react';
-import collectionLogo from '../assets/collections.png';
+import { Link, useNavigate } from 'react-router-dom';
+import { BASEURL } from 'constants/ServerData';
+import axios from 'axios';
+import CollectionCard from 'Components/CollectionCard';
+import { PlusCircleIcon, TrashIcon } from '@heroicons/react/outline'
+import AddCollectionModal from 'Components/Modal/AddCollectionModal';
+import ReactModal from 'react-modal';
 
 const Collections = (props) => {
+    const [collections, setCollections] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
+    const [showModal, setShowModal] = useState(false);
+    const [collectionName, setCollectionName] = useState("");
+    const [collectionDescription, setCollectionDescription] = useState("");
+    const navigate = useNavigate();
+
+
+    const getAllData = async () => {
+        axios.defaults.headers.common['Authorization'] = localStorage.getItem('token');
+        try {
+            setIsLoading(true);
+            await axios.get(`${BASEURL}/api/collections/`)
+                .then(res => {
+                    if (res?.status === 200) {
+                        setIsLoading(false);
+                        setCollections(res.data.data);
+                        console.log(Collections);
+                    } else {
+                        alert('Server Error');
+                    }
+                })
+                .catch(errr => alert('Server Error'));
+        } catch (error) {
+            alert('server error')
+        }
+    };
+
+    useEffect(() => {
+        if(localStorage.getItem('token')){
+            getAllData();
+        }
+        
+        
+    }, []);
+
+    const handleModal= () => {
+        setShowModal(!showModal);
+    }
+
+    const handleCloseModal = () => {
+        setShowModal(false);
+    }
+
+    const handleNameChange = (e) => {
+        setCollectionName(e);
+    }
+
+    const handleDescChange = (e) => {
+        setCollectionDescription(e);
+    }
+
+
+    const handleCreateCollection = () => {
+        if(collectionName === "" || collectionDescription === ""){
+            alert("Please fill all the fields");
+            setShowModal(false);
+            setCollectionName("");
+            setCollectionDescription("");
+            return;
+        }else{
+            axios.defaults.headers.common['Authorization'] = localStorage.getItem('token');
+            axios.post(`${BASEURL}/api/collections/`, {
+                name: collectionName,
+                description: collectionDescription
+            })
+            .then(res => {
+                console.log(res.status);
+                if(res.status === 200){
+                    setShowModal(false);
+                    setCollectionName("");
+                    setCollectionDescription("");
+                    getAllData();
+                }else if(res.status === 401){
+                    localStorage.removeItem('token');
+                    localStorage.removeItem('name');
+                    navigate('/login');
+                }
+                else{
+                    alert('Server Error');
+                }
+            })
+            .catch(err => {
+                localStorage.removeItem('token');
+                localStorage.removeItem('name');
+                navigate('/login');
+            });
+        }
+    }
+
 	return(
         <div className="mcontainer ">
 			<div className="flex flex-wrap">
-                <div className="w-full">
-                    <div>
+                {
+                    localStorage.getItem('token') ? <div className="w-full">
+                    <div className="flex flex-wrap space-x-reverse justify-between">
                         <h2 class="mb-4 text-2xl text-gray-600 font-bold md:text-3xl">Collections</h2>
+                        <button onClick={() => handleModal()} className="lg:w-1/6 flex items-center justify-center w-8 h-8 rounded-md bg-gray-800 text-white p-5" type="submit">
+                            <PlusCircleIcon className="h-6 w-6 cursor-pointer mx-2 text-white" />Add New
+                        </button>
                     </div>
-                    <div className="flex flex-wrap">
-                        <div className="w-full p-0">
-                            <div className="bg-white border-transparent rounded-lg shadow-lg">
-                                <div class="bg-white rounded-lg border shadow-md px-10 dark:bg-gray-800 dark:border-gray-700">
-                                    <ul role="list" class="">
-                                        <li class="py-4">
-                                            <div class="flex items-center space-x-4">
-                                                <div class="flex-shrink-0">
-                                                    <img class="w-12 border-2 h-12 rounded-full" src={collectionLogo} alt="Neil image"/>
-                                                </div>
-                                                <div class="flex-1 min-w-0">
-                                                    <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-                                                                Neil Sims
-                                                    </p>
-                                                    <p class="text-sm text-gray-500 truncate dark:text-gray-400">SEARCH_EMAIL</p>
-                                                </div>
-                                                <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                                                    SEARCH_AMOUNT
-                                                </div>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
+                    {
+                        collections.map((collection, index) => {
+                            return <CollectionCard collection={collection} key={index} />
+                        })
+                    }
+                    
+                </div>: <div className="flex  h-screen w-screen text-center justify-center items-center">
+                    <div className=''>
+                     You are not logged in. Please <Link to="/login" className='text-blue-600'>Login</Link> or <Link to="/register" className='text-blue-600'>Register</Link> to continue
+                    </div>
+                </div>
+                }
+                
+            </div>
+            <div>
+            <ReactModal
+                isOpen={showModal}
+                onRequestClose={handleCloseModal}
+                ariaHideApp={false}
+                style={{
+                    content: {
+                        top: '15%',
+                        left: '34%',
+                        right: '34%',
+                        bottom: '15%',
+                    },
+                    overlay:{
+                        backgroundColor: 'rgba(0,0,0,0.5)'
+                    }
+                }}
+            >
+                <div className="flex flex-col items-center justify-center mt-8 text-gray-700">
+                    <div className="flex flex-wrap space-x-reverse justify-between">
+                        <h2 class="mb-4 text-2xl text-gray-600 font-bold md:text-3xl">Create new collection</h2>
+                    </div>
+                    <div className="flex flex-col justify-center bg-white rounded ">
+                        <label className="font-semibold text-xs" htmlFor="nameField">Name</label>
+                        <input id="nameField" className="flex items-center h-12 px-4 w-96 bg-gray-200 mt-2 rounded focus:outline-none focus:ring-2" type="text" onChange={(e)=>handleNameChange(e.target.value)} />
+                        <label className="font-semibold text-xs mt-3" htmlFor="descriptionField">Description</label>
+                        <textarea id="descriptionField" className="flex items-center h-36 px-4 w-96 bg-gray-200 mt-2 rounded focus:outline-none focus:ring-2" type="text" onChange={(e)=>handleDescChange(e.target.value)}/>
+                        <div className="flex mt-6 justify-center text-xs space-x-2">
+                            <button className="flex items-center justify-center w-1/2 h-12 px-6  bg-gray-800 rounded font-semibold text-sm text-white hover:bg-gray-700" onClick={()=>handleCreateCollection()}>Create</button>
+                            <button className="flex items-center justify-center w-1/2 h-12 px-6  bg-orange-800 rounded font-semibold text-sm text-white hover:bg-orange-700" onClick={()=>handleCloseModal()}>Cancel</button>
                         </div>
                     </div>
                 </div>
-            </div>
+            </ReactModal>
+           
+            
+        </div>
         </div>
 	);
 }
