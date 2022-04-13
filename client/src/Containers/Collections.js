@@ -4,7 +4,6 @@ import { BASEURL } from 'constants/ServerData';
 import axios from 'axios';
 import CollectionCard from 'Components/CollectionCard';
 import { PlusCircleIcon, TrashIcon } from '@heroicons/react/outline'
-import AddCollectionModal from 'Components/Modal/AddCollectionModal';
 import ReactModal from 'react-modal';
 
 const Collections = (props) => {
