@@ -20,9 +20,7 @@ function processTime(time) {
     return [start.toString(),end.toString()];
 }
 
-exports.restaurantController = (req, res) => {
-    console.log("On restaurantController");
-
+exports.preProcessController = (req, res) => {
     var daylist = ["Sun","Mon","Tues","Weds","Thurs","Fri","Sat"];
     client.query(`SELECT * FROM restaurants`, (err, result) => {
         for(let i = 0; i < result.rows.length; i++) {
