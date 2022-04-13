@@ -32,9 +32,10 @@ exports.collectionController = async(req, res) => {
                 });
             }
             else{
-                return res.status(404).json({
-                    success: false,
-                    msg: "Collection not found"
+                return res.status(200).json({
+                    success: true,
+                    msg: "No collection found",
+                    data: []
                 });
             }
         }
@@ -51,9 +52,10 @@ exports.collectionController = async(req, res) => {
                     });
                 }
                 else{
-                    return res.status(404).json({
-                        success: false,
-                        msg: "Collection not found"
+                    return res.status(200).json({
+                        success: true,
+                        msg: "No collection found",
+                        data: []
                     });
 
                 }
@@ -155,9 +157,10 @@ exports.collectionRestaurantController = async(req, res) => {
                 });
             }
             else{
-                return res.status(404).json({
+                return res.status(200).json({
                     success: false,
-                    msg: "No Restaurant found in collection"
+                    msg: "No Restaurant found in collection",
+                    data: []
                 });
             }
         }

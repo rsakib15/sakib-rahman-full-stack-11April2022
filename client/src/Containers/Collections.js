@@ -110,8 +110,13 @@ const Collections = (props) => {
                         </button>
                     </div>
                     {
+                        collections.length===0 ? <div className="flex mt-32 text-center justify-center items-center">
+                        <div className=''>
+                            <h3 className="text-2xl font-bold text-red-800">No Collections Found</h3>
+                        </div>
+                        </div>:
                         collections.map((collection, index) => {
-                            return <CollectionCard collection={collection} key={index} />
+                            return <CollectionCard collection={collection} key={index} getAllData={getAllData} />
                         })
                     }
                     
