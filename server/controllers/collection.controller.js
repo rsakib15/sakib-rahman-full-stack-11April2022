@@ -197,9 +197,9 @@ exports.collectionRestaurantController = async(req, res) => {
         }
     }
     else if(req.method === "DELETE"){
-        const {id} = req.params;
-        if(id){
-            const data = await client.query(`DELETE FROM collections_restaurants WHERE id = $1 RETURNING*`, [id]);
+        const {collection_id,restaurant_id} = req.params;
+        if(collection_id && restaurant_id){
+            const data = await client.query(`DELETE FROM clrestaurants WHERE collection_id=$1 and restaurant_id=$2 RETURNING*`, [collection_id,restaurant_id]);
             const arr = data.rows;
             if(arr.length != 0){
                 return res.status(200).json({
