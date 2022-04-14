@@ -38,7 +38,7 @@ const RestaurantCardInfo = ({data}) => {
 			<div className="flex-none w-60 relative">
 				<img src={reslogo} alt="" className="absolute inset-0 w-full h-full object-cover" />
   			</div>
-			<form className="flex-auto p-6">
+			<div className="flex-auto p-6">
 				<div className="flex flex-wrap">
 					<h1 className="flex-auto text-xl font-semibold">{data.name}</h1>
 					<div className="w-full flex-none text-sm font-medium text-gray-500 mt-0">Restaurant</div>
@@ -77,7 +77,7 @@ const RestaurantCardInfo = ({data}) => {
 						<button className="lg:w-1/2 flex items-center justify-center w-9 h-9 rounded-md bg-slate-100 text-black" type="submit">Show Hours</button>
 					</div>
 				</div>
-			</form>
+			</div>
         </div>
     );
 }

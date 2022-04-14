@@ -5,8 +5,9 @@ const {
     collectionRestaurantController,
 } = require("../controllers/collection.controller");
 router.get('/collections',collectionController);
-router.get('/collections/:id',collectionController);
 router.post('/collections',collectionController);
+
+router.get('/collections/:id',collectionRestaurantController);
 router.put('/collections/:id',collectionController);
 router.delete('/collections/:id',collectionController);
 router.get('/collections/:id/restaurants',collectionRestaurantController);

@@ -4,12 +4,14 @@ import { PencilAltIcon, TrashIcon } from '@heroicons/react/outline'
 import axios from 'axios';
 import { BASEURL } from 'constants/ServerData';
 import ReactModal from 'react-modal';
+import Drawer from "Components/Drawer";
 
 
 const CollectionCard = ({collection, getAllData}) => {
     const [showEdit, setShowEdit] = useState(false);
     const [newName, setNewName] = useState(collection.name);
     const [newDescription, setNewDescription] = useState(collection.description);
+    const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
     const handleCollectionEdit = () => {
         axios.defaults.headers.common['Authorization'] = localStorage.getItem('token');
@@ -39,6 +41,9 @@ const CollectionCard = ({collection, getAllData}) => {
     const handleDescChange = (e) => {
         setNewDescription(e);
     }
+    const handleDrawer= () => {
+        setIsDrawerOpen(!isDrawerOpen);
+    }
 
     const handleDelete = (e) => {
         axios.defaults.headers.common['Authorization'] = localStorage.getItem('token');
@@ -58,18 +63,18 @@ const CollectionCard = ({collection, getAllData}) => {
         <div className="flex flex-wrap mb-2">
             <div className="w-full p-0">
                 <div className="bg-white border-transparent rounded-lg shadow-lg">
-                    <div class="bg-white rounded-lg border shadow-md px-10 dark:bg-gray-800 dark:border-gray-700">
-                        <ul role="list" class="">
-                            <li class="py-4">
-                                <div class="flex items-center space-x-4">
-                                    <div class="flex-shrink-0">
-                                        <img class="w-12 border-2 h-12 rounded-full" src={collectionLogo} alt="Neil image"/>
+                    <div className="bg-white rounded-lg border shadow-md px-10 dark:bg-gray-800 dark:border-gray-700">
+                        <ul role="list">
+                            <li className="py-4">
+                                <div className="flex items-center space-x-4">
+                                    <div className="flex-shrink-0">
+                                        <img className="w-12 border-2 h-12 rounded-full" src={collectionLogo} alt="Neil image"/>
                                                 </div>
-                                                <div class="flex-1 min-w-0 cursor-pointer">
-                                                    <p class="text-sm font-medium text-gray-900 truncate dark:text-white">{collection.name.length>20 ? collection.name.substring(0,20)+"..." : collection.name}</p>
-                                                    <p class="text-sm text-gray-500 truncate dark:text-gray-400">{collection.description}</p>
+                                                <div className="flex-1 min-w-0 cursor-pointer" onClick={handleDrawer}>
+                                                    <p className="text-sm font-medium text-gray-900 truncate dark:text-white">{collection.name}</p>
+                                                    <p className="text-sm text-gray-500 truncate dark:text-gray-400">{collection.description}</p>
                                                 </div>
-                                                <div class="inline-flex items-center text-base font-semibold rounded space-x-2">
+                                                <div className="inline-flex items-center text-base font-semibold rounded space-x-2">
                                                     <div className=' text-base font-semibold text-gray-900 dark:text-white rounded bg-gray-800  p-2 cursor-pointer' onClick={() => handleModal()}>
                                                         <PencilAltIcon className="h-5 w-5 mx-2 text-white"  />
                                                     </div>
@@ -102,7 +107,7 @@ const CollectionCard = ({collection, getAllData}) => {
                         >
                             <div className="flex flex-col items-center justify-center mt-8 text-gray-700">
                                 <div className="flex flex-wrap space-x-reverse justify-between">
-                                    <h2 class="mb-4 text-2xl text-gray-600 font-bold md:text-3xl">Create new collection</h2>
+                                    <h2 className="mb-4 text-2xl text-gray-600 font-bold md:text-3xl">Create new collection</h2>
                                 </div>
                                 <div className="flex flex-col justify-center bg-white rounded ">
                                     <label className="font-semibold text-xs" htmlFor="nameField">Name</label>
@@ -116,6 +121,7 @@ const CollectionCard = ({collection, getAllData}) => {
                                 </div>
                             </div>
                         </ReactModal>
+                        <Drawer isOpen={isDrawerOpen} setIsOpen={setIsDrawerOpen} collection={collection}></Drawer>
                     </div>
     )
     }
