@@ -10,7 +10,6 @@ app.use(bodyParser.json());
 
 const PORT = process.env.PORT || 5000;
 if (process.env.NODE_ENV === 'development') {
-    console.log("On Development mode");
     app.use(cors({origin: process.env.CLIENT_URL}));
     app.use(morgan('dev'));
 }

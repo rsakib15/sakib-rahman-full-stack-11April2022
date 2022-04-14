@@ -21,7 +21,6 @@ const handleLogout = () => {
 }
 
 export default function Navbar(props) {
-	console.log(window.location.pathname);
   	return (
 	  	<div className='bg-gray-800 w-full '>
         	<div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 ">

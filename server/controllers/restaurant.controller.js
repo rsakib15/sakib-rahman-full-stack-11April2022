@@ -86,7 +86,6 @@ exports.restaurantSearchController = async(req, res) => {
 
 exports.restaurantOpenTimeController = async(req, res) => {
     const {time} = req.params;
-    console.log(time);
     if(time){
         const data =  await client.query(`SELECT restaurants.id, restaurants.name, hours.day, 
             hours.opening_time, hours.closing_time FROM  restaurants,hours WHERE hours.restaurant_id=restaurants.id 

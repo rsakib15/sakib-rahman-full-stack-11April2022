@@ -23,17 +23,14 @@ const TimePicker = ({time, onChange}) =>{
 
     const handleChange = (e) => {
         if(e.target.id=="hour"){
-            console.log("hour", e.target.value);
             onChange(`${e.target.value}:${minute} ${ap}`);
             setHour(e.target.value);
         }
         else if(e.target.id=="minute"){
-            console.log("minute", e.target.value);
             setMinute(e.target.value);
             onChange(`${hour}:${e.target.value} ${ap}`);
         }
         else if(e.target.id=="ap"){
-            console.log("ap", e.target.value);
             setAP(e.target.value);
             onChange(`${hour}:${minute} ${e.target.value}`);
         }

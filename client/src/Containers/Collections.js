@@ -24,7 +24,6 @@ const Collections = (props) => {
                     if (res?.status === 200) {
                         setIsLoading(false);
                         setCollections(res.data.data);
-                        console.log(Collections);
                     } else {
                         alert('Server Error');
                     }
@@ -74,7 +73,6 @@ const Collections = (props) => {
                 description: collectionDescription
             })
             .then(res => {
-                console.log(res.status);
                 if(res.status === 200){
                     setShowModal(false);
                     setCollectionName("");
@@ -103,7 +101,7 @@ const Collections = (props) => {
                 {
                     localStorage.getItem('token') ? <div className="w-full">
                     <div className="flex flex-wrap space-x-reverse justify-between">
-                        <h2 class="mb-4 text-2xl text-gray-600 font-bold md:text-3xl">Collections</h2>
+                        <h2 className="mb-4 text-2xl text-gray-600 font-bold md:text-3xl">Collections</h2>
                         <button onClick={() => handleModal()} className="lg:w-1/6 flex items-center justify-center w-8 h-8 rounded-md bg-gray-800 text-white p-5" type="submit">
                             <PlusCircleIcon className="h-6 w-6 cursor-pointer mx-2 text-white" />Add New
                         </button>
@@ -146,7 +144,7 @@ const Collections = (props) => {
             >
                 <div className="flex flex-col items-center justify-center mt-8 text-gray-700">
                     <div className="flex flex-wrap space-x-reverse justify-between">
-                        <h2 class="mb-4 text-2xl text-gray-600 font-bold md:text-3xl">Create new collection</h2>
+                        <h2 className="mb-4 text-2xl text-gray-600 font-bold md:text-3xl">Create new collection</h2>
                     </div>
                     <div className="flex flex-col justify-center bg-white rounded ">
                         <label className="font-semibold text-xs" htmlFor="nameField">Name</label>

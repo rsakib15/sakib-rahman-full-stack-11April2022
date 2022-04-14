@@ -103,10 +103,6 @@ const App = (props) => {
 	}, []);
 
 	const handleSearch = () => {
-		console.log("handle search")
-		console.log(time);
-		console.log(name);
-		
 		if(name && !time && name.trim().length > 0) getDataByName();
 		else if(!name && time && time.trim().length > 0) getDataByTime();
 		else if(name && time && name.trim().length > 0 && time.trim().length > 0) getDataByNameAndTime();
@@ -125,7 +121,6 @@ const App = (props) => {
 		setName(e);
 	};
 	const handleTimeChange = (e) => {
-		console.log("handleTimeChange: ",e);
 		setTime(e);
 	};
 
@@ -137,7 +132,7 @@ const App = (props) => {
 						isLoading ? <div className="w-full lg:w-3/4"><div className="text-center">Loading...</div></div> : restaurants.length > 0 ?
 						<div className="w-full lg:w-3/4">
 							<div>
-								<h2 class="mb-4 text-2xl text-gray-600 font-bold md:text-3xl">Restaurants</h2>
+								<h2 className="mb-4 text-2xl text-gray-600 font-bold md:text-3xl">Restaurants</h2>
 							</div>
 							<RestaurantCard restaurants={currentPosts} /> 
 							<Pagination

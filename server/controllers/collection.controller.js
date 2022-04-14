@@ -20,10 +20,9 @@ function verifyToken(req, res, next){
 
 exports.collectionController = async(req, res) => {
     if(req.method === "GET"){
-        console.log(req.headers.authorization);
         const {id} = req.params;
         if(id){
-            const data = await client.query(`SELECT * FROM collections WHERE id = $1;`, [id]);
+            const data = await client.query(`SELECT * FROM collections WHERE id = $1 ORDER BY id ASC;`, [id]);
             const arr = data.rows;
             if(arr.length != 0){
                 return res.status(200).json({
@@ -42,8 +41,7 @@ exports.collectionController = async(req, res) => {
         else{
             verifyToken(req, res, async() => {
                 const {userId} = req;
-                console.log(userId);
-                const data = await client.query(`SELECT * FROM collections WHERE created_by = $1;`, [userId]);
+                const data = await client.query(`SELECT * FROM collections WHERE created_by = $1 ORDER BY id ASC;`, [userId]);
                 const arr = data.rows;
                 if(arr.length != 0){
                     return res.status(200).json({
@@ -148,7 +146,9 @@ exports.collectionRestaurantController = async(req, res) => {
     if(req.method === "GET"){
         const {id} = req.params;
         if(id){
-            const data = await client.query(`SELECT * FROM clrestaurants where collection_id=$1;`,[id]);
+            const data = await client.query(`SELECT clrestaurants.restaurant_id, restaurants.name, hours.day, hours.opening_time, hours.closing_time
+            from clrestaurants, restaurants, hours where 
+            clrestaurants.collection_id=$1 and restaurants.id = hours.restaurant_id and clrestaurants.restaurant_id=restaurants.id`,[id]);
             const arr = data.rows;
             if(arr.length != 0){
                 return res.status(200).json({
@@ -158,7 +158,7 @@ exports.collectionRestaurantController = async(req, res) => {
             }
             else{
                 return res.status(200).json({
-                    success: false,
+                    success: true,
                     msg: "No Restaurant found in collection",
                     data: []
                 });
