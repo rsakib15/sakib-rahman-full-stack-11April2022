@@ -121,7 +121,7 @@ const CollectionCard = ({collection, getAllData}) => {
                                 </div>
                             </div>
                         </ReactModal>
-                        <Drawer isOpen={isDrawerOpen} setIsOpen={setIsDrawerOpen} collection={collection}></Drawer>
+                        <Drawer isOpen={isDrawerOpen} setIsOpen={setIsDrawerOpen} collection={collection} addToCollection={false}></Drawer>
                     </div>
     )
     }

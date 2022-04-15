@@ -174,7 +174,16 @@ exports.collectionRestaurantController = async(req, res) => {
     else if(req.method === "POST"){
         const {collection_id, restaurant_id} = req.body;
         if(collection_id && restaurant_id){
-            const data = await client.query(`INSERT INTO clrestaurants (collection_id, restaurant_id) VALUES ((select id from restaurants where id = $1), (select id from collections where id = $2)) RETURNING*`, [collection_id, restaurant_id]);
+            const d = await client.query(`SELECT * FROM clrestaurants WHERE collection_id = $1 AND restaurant_id = $2`, [collection_id, restaurant_id]);
+            const a = d.rows;
+            if(a.length != 0){
+                return res.status(200).json({
+                    success: true,
+                    msg: "Restaurant already in collection"
+
+                });
+            }
+            const data = await client.query(`INSERT INTO clrestaurants (collection_id, restaurant_id) VALUES ($1,$2) RETURNING*`, [collection_id, restaurant_id]);
             const arr = data.rows;
             if(arr.length != 0){
                 return res.status(201).json({
@@ -183,9 +192,9 @@ exports.collectionRestaurantController = async(req, res) => {
                 });
             }
             else{
-                return res.status(404).json({
+                return res.status(500).json({
                     success: false,
-                    msg: "Collection not found"
+                    msg: "Internal Server Error"
                 });
             }
         }

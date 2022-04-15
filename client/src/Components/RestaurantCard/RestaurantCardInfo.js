@@ -1,8 +1,10 @@
 import reslogo from "./../../assets/restaurant-logo.png";
-
+import React, { useEffect, useState } from 'react';
+import Drawer from "Components/Drawer";
 var _=require('lodash');
 
 const RestaurantCardInfo = ({data}) => {
+	const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 	var res_hours = data.hours;
 	var result = _.groupBy(res_hours,'opening_time')
 	var keys = Object.keys(result);
@@ -19,6 +21,9 @@ const RestaurantCardInfo = ({data}) => {
 			days: d
 		})
 	}
+	const handleDrawer= () => {
+        setIsDrawerOpen(!isDrawerOpen);
+    }
 	
 	const modify12HourFormat = (time) => {
 		var t = time.split(':');
@@ -73,11 +78,11 @@ const RestaurantCardInfo = ({data}) => {
 				</div>
 				<div className="flex space-x-3 mb-4 text-sm font-medium">
 					<div className="flex-auto flex space-x-3">
-						<button className="lg:w-1/2 flex items-center justify-center w-9 h-9 rounded-md bg-black text-white" type="submit">Add to Collection</button>
-						<button className="lg:w-1/2 flex items-center justify-center w-9 h-9 rounded-md bg-slate-100 text-black" type="submit">Show Hours</button>
+						<button onClick={handleDrawer} className="lg:w-full flex items-center justify-center w-9 h-9 rounded-md bg-black text-white" type="submit">Add to Collection</button>
 					</div>
 				</div>
 			</div>
+			<Drawer isOpen={isDrawerOpen} setIsOpen={setIsDrawerOpen} addToCollection={true} restaurant_id={data.id}></Drawer>
         </div>
     );
 }

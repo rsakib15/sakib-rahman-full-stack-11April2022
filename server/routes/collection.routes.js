@@ -12,6 +12,8 @@ router.put('/collections/:id',collectionController);
 router.delete('/collections/:id',collectionController);
 router.get('/collections/:id/restaurants',collectionRestaurantController);
 router.post('/collections/:id/restaurants',collectionRestaurantController);
+
 router.delete('/collections/:collection_id/:restaurant_id',collectionRestaurantController);
+router.post('/clrestaurants/',collectionRestaurantController);
 
 module.exports = router;
