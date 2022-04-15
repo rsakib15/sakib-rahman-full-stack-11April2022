@@ -117,6 +117,7 @@ exports.collectionController = async(req, res) => {
     else if(req.method === "DELETE"){
         const {id} = req.params;
         if(id){
+            await client.query(`DELETE FROM clrestaurants WHERE collection_id = $1`, [id]);
             const data = await client.query(`DELETE FROM collections WHERE id = $1 RETURNING*`, [id]);
             const arr = data.rows;
             if(arr.length != 0){
