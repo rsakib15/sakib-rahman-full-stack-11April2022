@@ -18,4 +18,21 @@ This is the raw data for restaurant opening hours - (https://gist.githubusercont
 - Hosting: Heroku
 
 # Installation
-- 
+Clone the repo and install the dependencies.
+
+```
+git clone https://github.com/rsakib15/sakib-rahman-full-stack-11April2022
+cd sakib-rahman-full-stack-11April2022
+```
+
+Install Nodejs dependencies 
+
+```
+npm install 
+```
+Install React dependencies 
+
+```
+cd client
+npm install 
+```
