@@ -3,13 +3,14 @@ import axios from "axios";
 import { BASEURL } from "../../constants/ServerData";
 import { useNavigate } from "react-router-dom";
 
-const CollectionRestaurantCardInfo = ({key, data, collection}) => {
+const CollectionRestaurantCardInfo = ({key, data, collection, getAllData}) => {
     const navigate = useNavigate();
     const handleDelete = (e) => {
         axios.delete(`${BASEURL}/api/collections/${collection.id}/${data[0].restaurant_id}`)
             .then(res => {
                 if (res?.status === 200) {
                     alert('Deleted');
+                    getAllData();
                     
                 } else {
                     alert('Server Error');

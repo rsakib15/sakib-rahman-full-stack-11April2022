@@ -51,7 +51,7 @@ const CollectionRestaurantCard = ({collection}) => {
                 {
 					Object.entries(restaurants).map(([key, value]) => {
 						return(
-							<CollectionRestaurantCardInfo key={key} data={value} collection={collection} />
+							<CollectionRestaurantCardInfo key={key} data={value} collection={collection} getAllData={getAllData} />
 						)
 					})
 				}
