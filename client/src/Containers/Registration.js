@@ -76,12 +76,12 @@ const Registration = (props) => {
         <div className="flex flex-col items-center pt-10 w-screen h-screen bg-gray-200 text-gray-700">
             <div className="flex flex-col bg-white rounded shadow-lg p-12 mt-12" action="">
                 <label className="font-semibold text-xs" htmlFor="nameField" >Name</label>
-                <input id="nameField" className="flex items-center h-12 px-4 w-64 bg-gray-200 mt-2 rounded focus:outline-none focus:ring-2" type="text" onChange={(e)=>{handleNameChange(e.target.value)}}/>
+                <input autoComplete="off" id="nameField" className="flex items-center h-12 px-4 w-64 bg-gray-200 mt-2 rounded focus:outline-none focus:ring-2" type="text" onChange={(e)=>{handleNameChange(e.target.value)}}/>
                 <label className="font-semibold text-xs mt-3" htmlFor="emailField" >Email</label>
-                <input id="emailField" className="flex items-center h-12 px-4 w-64 bg-gray-200 mt-2 rounded focus:outline-none focus:ring-2" type="email" onChange={(e)=>{handleEmailChange(e.target.value)}}/>
+                <input autoComplete="off" id="emailField" className="flex items-center h-12 px-4 w-64 bg-gray-200 mt-2 rounded focus:outline-none focus:ring-2" type="email" onChange={(e)=>{handleEmailChange(e.target.value)}}/>
                 <label className="font-semibold text-xs mt-3" htmlFor="passwordField">Password</label>
-                <input id="passwordField" className="flex items-center h-12 px-4 w-64 bg-gray-200 mt-2 rounded focus:outline-none focus:ring-2"type="password" onChange={(e)=>{handlePasswordChange(e.target.value)}}/>
-                <button className="flex items-center justify-center h-12 px-6 w-64 bg-blue-600 mt-8 rounded font-semibold text-sm text-blue-100 hover:bg-blue-700" onClick={()=>registerUser()}>CREATE ACCOUNT</button>
+                <input autoComplete="off" id="passwordField" className="flex items-center h-12 px-4 w-64 bg-gray-200 mt-2 rounded focus:outline-none focus:ring-2"type="password" onChange={(e)=>{handlePasswordChange(e.target.value)}}/>
+                <button class="lg:w-full flex items-center justify-center w-9 h-9 rounded-md bg-black text-white mt-4" onClick={()=>registerUser()}>CREATE ACCOUNT</button>
                 <div className="flex mt-6 justify-center text-xs">
                     <span className="mx-2 text-gray-500">Already have account?</span>
                     <Link className="text-blue-400 hover:text-blue-500" to="/login">Sign In</Link>
