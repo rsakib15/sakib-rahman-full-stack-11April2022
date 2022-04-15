@@ -14,7 +14,12 @@ const CollectionRestaurantCardInfo = ({key, data, collection}) => {
                     alert('Server Error');
                 }
             }
-        )
+        ).catch(err => {
+            localStorage.removeItem('token');
+            localStorage.removeItem('name');
+            alert('You are not logged in');
+            navigate('/login');
+        });
     }
     return(
         <div className="flex bg-white rounded-lg border shadow-md dark:bg-gray-800 dark:border-gray-700 p-3">

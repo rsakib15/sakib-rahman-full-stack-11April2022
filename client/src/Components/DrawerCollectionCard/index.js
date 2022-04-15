@@ -20,7 +20,12 @@ const DrawerCollectionCard = ({restaurant_id}) => {
                     alert('Server Error');
                 }
             })
-            .catch(err => alert('Server Error'));
+            .catch(err => {
+                localStorage.removeItem('token');
+                localStorage.removeItem('name');
+                alert('You are not logged in');
+                navigate('/login');
+            });
     };
 
     const handleAddCollection = (collection_id) => {
@@ -41,7 +46,12 @@ const DrawerCollectionCard = ({restaurant_id}) => {
             else {
                 alert('Server Error');
             }
-        }).catch(err => alert('Server Error'));
+        }).catch(err => {
+            localStorage.removeItem('token');
+            localStorage.removeItem('name');
+            alert('You are not logged in');
+            navigate('/login');
+        });
     };
 
     useEffect (() => {

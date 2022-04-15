@@ -5,6 +5,7 @@ import axios from 'axios';
 import { BASEURL } from 'constants/ServerData';
 import ReactModal from 'react-modal';
 import Drawer from "Components/Drawer";
+import { useNavigate } from 'react-router-dom';
 
 
 const CollectionCard = ({collection, getAllData}) => {
@@ -12,6 +13,7 @@ const CollectionCard = ({collection, getAllData}) => {
     const [newName, setNewName] = useState(collection.name);
     const [newDescription, setNewDescription] = useState(collection.description);
     const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+    const navigate = useNavigate();
 
     const handleCollectionEdit = () => {
         axios.defaults.headers.common['Authorization'] = localStorage.getItem('token');
@@ -25,7 +27,12 @@ const CollectionCard = ({collection, getAllData}) => {
             } else {
                 alert('Server Error');
             }
-        }).catch(err => alert('Server Error'));
+        }).catch(err =>{
+            localStorage.removeItem('token');
+            localStorage.removeItem('name');
+            alert('You are not logged in');
+            navigate('/login');
+        });
     }
     const handleModal= () => {
         setNewName(collection.name);
@@ -55,7 +62,12 @@ const CollectionCard = ({collection, getAllData}) => {
                 } else {
                     alert('Server Error');
                 }
-            })
+            }).catch(err => {
+                localStorage.removeItem('token');
+                localStorage.removeItem('name');
+                alert('You are not logged in');
+                navigate('/login');
+            });
     }
 
 
