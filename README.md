@@ -36,3 +36,18 @@ Install React dependencies
 cd client
 npm install 
 ```
+
+# Run on development server
+
+Run frontend and backend separately
+
+```
+npm backend
+npm frontend
+```
+
+Concurrently run frontend and backend
+
+```
+npm dev
+```
