@@ -6,8 +6,8 @@ import UserImage from "./../../assets/user.png";
 import {  NavLink, Link  } from 'react-router-dom';
 
 const navigation = [
-	{ name: 'Dashboard', href: '/', current: false },
-	{ name: 'Collections', href: '/collections', current: false },
+	{ name: 'Dashboard', href: '/'},
+	{ name: 'Collections', href: '/collections'},
 ]
 
 function classNames(...classes) {
@@ -34,12 +34,7 @@ export default function Navbar(props) {
 								{
 									navigation.map((item) => (
 										<NavLink key={item.name} to={item.href}
-											className={classNames(
-											window.location.pathname == item.href ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-											'px-3 py-2 rounded-md text-sm font-medium'
-											)}
-											aria-current={item.current ? 'page' : undefined}
-										>
+											className='text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium'>
 											{item.name}
 										</NavLink>
 									))
