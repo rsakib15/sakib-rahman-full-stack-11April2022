@@ -148,9 +148,9 @@ const Collections = (props) => {
                     </div>
                     <div className="flex flex-col justify-center bg-white rounded ">
                         <label className="font-semibold text-xs" htmlFor="nameField">Name</label>
-                        <input id="nameField" className="flex items-center h-12 px-4 w-96 bg-gray-200 mt-2 rounded focus:outline-none focus:ring-2" type="text" onChange={(e)=>handleNameChange(e.target.value)} />
+                        <input autoComplete='off' id="nameField" className="flex items-center h-12 px-4 w-96 bg-gray-200 mt-2 rounded focus:outline-none focus:ring-2" type="text" onChange={(e)=>handleNameChange(e.target.value)} />
                         <label className="font-semibold text-xs mt-3" htmlFor="descriptionField">Description</label>
-                        <textarea id="descriptionField" className="flex items-center h-36 px-4 w-96 bg-gray-200 mt-2 rounded focus:outline-none focus:ring-2" type="text" onChange={(e)=>handleDescChange(e.target.value)}/>
+                        <textarea autoComplete='off' id="descriptionField" className="flex items-center h-36 px-4 w-96 bg-gray-200 mt-2 rounded focus:outline-none focus:ring-2" type="text" onChange={(e)=>handleDescChange(e.target.value)}/>
                         <div className="flex mt-6 justify-center text-xs space-x-2">
                             <button className="flex items-center justify-center w-1/2 h-12 px-6  bg-gray-800 rounded font-semibold text-sm text-white hover:bg-gray-700" onClick={()=>handleCreateCollection()}>Create</button>
                             <button className="flex items-center justify-center w-1/2 h-12 px-6  bg-orange-800 rounded font-semibold text-sm text-white hover:bg-orange-700" onClick={()=>handleCloseModal()}>Cancel</button>
