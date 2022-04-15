@@ -1,9 +1,10 @@
 import { TrashIcon } from "@heroicons/react/outline";
 import axios from "axios";
 import { BASEURL } from "../../constants/ServerData";
+import { useNavigate } from "react-router-dom";
 
 const CollectionRestaurantCardInfo = ({key, data, collection}) => {
-    console.log(key)
+    const navigate = useNavigate();
     const handleDelete = (e) => {
         axios.delete(`${BASEURL}/api/collections/${collection.id}/${data[0].restaurant_id}`)
             .then(res => {

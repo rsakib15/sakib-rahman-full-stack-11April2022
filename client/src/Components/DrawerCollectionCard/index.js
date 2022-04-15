@@ -2,10 +2,12 @@ import { useEffect, useState } from "react";
 import axios from 'axios';
 import { BASEURL } from 'constants/ServerData';
 import { Link } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 const DrawerCollectionCard = ({restaurant_id}) => {
     const [collection, setCollection] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
+    const navigate = useNavigate();
 
     const getAllCollection = () => {
         setIsLoading(true);
