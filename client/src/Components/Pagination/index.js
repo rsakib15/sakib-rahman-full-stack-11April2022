@@ -27,7 +27,7 @@ export default function Pagination({
 			<div className="flex justify-center mt-5">
 				<nav className='relative z-0 inline-flex justify-center rounded-md shadow-sm -space-x-px' aria-label='Pagination'>
 					<a onClick={() => { currentPage!=1? paginateBack():showError()}} href='#'className='relative inline-flex items-center  py-4 w-24 text-center justify-center rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50'><span>Previous</span></a>
-					<a onClick={() => { paginateFront();}} href='#' className='relative inline-flex items-center  py-4 w-24 text-center justify-center rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50'><span>Next</span></a>
+					<a onClick={() => { currentPage*postsPerPage<totalPosts? paginateFront(): showError()}} href='#' className='relative inline-flex items-center  py-4 w-24 text-center justify-center rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50'><span>Next</span></a>
 				</nav>
 			</div>
 		</div>

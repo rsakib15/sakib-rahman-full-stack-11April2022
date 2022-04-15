@@ -96,6 +96,7 @@ const App = (props) => {
   	const paginateBack = () => setCurrentPage(currentPage - 1);
 
 	useEffect(() => {	
+		setCurrentPage(1);
 		if(name && !time) getDataByName();
 		else if(!name && time) getDataByTime();
 		else if(name && time) getDataByNameAndTime();
@@ -103,6 +104,7 @@ const App = (props) => {
 	}, []);
 
 	const handleSearch = () => {
+		setCurrentPage(1);
 		if(name && !time && name.trim().length > 0) getDataByName();
 		else if(!name && time && time.trim().length > 0) getDataByTime();
 		else if(name && time && name.trim().length > 0 && time.trim().length > 0) getDataByNameAndTime();
@@ -112,6 +114,7 @@ const App = (props) => {
 	};
 
 	const handleReset = () => {
+		setCurrentPage(1);
 		setName("");
 		setTime("");
 		getAllData();
