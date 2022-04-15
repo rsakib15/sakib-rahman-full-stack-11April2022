@@ -68,7 +68,7 @@ const Login = ({handleLoggedIn}) => {
                 <input autoComplete="off" className="flex items-center h-12 px-4 w-64 bg-gray-200 mt-2 rounded focus:outline-none focus:ring-2" id="emailField" type="text" onChange={(e) => handleEmailChange(e.target.value)}/>
                 <label className="font-semibold text-xs mt-3" htmlFor="passwordField">Password</label>
                 <input autoComplete="off" className="flex items-center h-12 px-4 w-64 bg-gray-200 mt-2 rounded focus:outline-none focus:ring-2" id="passwordField" type="password" onChange={(e) => handlePasswordChange(e.target.value)}/>
-                <button class="lg:w-full flex items-center justify-center w-9 h-9 rounded-md bg-black text-white mt-4" onClick={() => loginUser()}>LOGIN</button>
+                <button class="w-full flex items-center justify-center rounded-md bg-gray-800 text-white mt-4 hover:bg-gray-700 p-2" onClick={() => loginUser()}>LOGIN</button>
                 <div className="flex mt-6 justify-center text-xs">
                     <span className="mx-1 text-gray-500">Don't have account?</span>
                     <Link className="text-blue-400 hover:text-blue-500" to="/registration">Sign Up</Link>
