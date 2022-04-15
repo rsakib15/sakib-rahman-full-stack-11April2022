@@ -60,7 +60,7 @@ exports.restaurantSearchController = async(req, res) => {
         const n = name.toLowerCase();
         const data = await client.query(`SELECT restaurants.id, restaurants.name, hours.day, 
         hours.opening_time, hours.closing_time FROM restaurants,hours WHERE 
-        hours.restaurant_id=restaurants.id AND restaurants.name LIKE '%${n}%';`);
+        hours.restaurant_id=restaurants.id AND lower(restaurants.name) LIKE '%${n}%';`);
         const arr = data.rows;
         if (arr.length  !=  0) {
             return  res.status(200).json({
@@ -118,10 +118,10 @@ exports.restaurantOpenTimeController = async(req, res) => {
 exports.restaurantNameTimeController = async(req, res) => {
     const {name, time} = req.params;
     if(name && time){
+        const n = name.toLowerCase();
         const  data  =  await client.query(`SELECT restaurants.id, restaurants.name, hours.day, 
             hours.opening_time, hours.closing_time FROM  restaurants,hours WHERE hours.restaurant_id=restaurants.id 
-            AND hours.opening_time = $1 AND restaurants.name = $2`, [time, name]
-        );
+            AND hours.opening_time = '${time}' AND lower(restaurants.name) LIKE '%${n}%';`);
         const  arr  =  data.rows;
         if (arr.length  !=  0) {
             return  res.status(200).json({
