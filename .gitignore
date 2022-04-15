@@ -130,3 +130,4 @@ dist
 yarn.lock
 .pnp.*
 config/*
+client/package-lock.json
