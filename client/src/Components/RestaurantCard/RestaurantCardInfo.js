@@ -48,25 +48,25 @@ const RestaurantCardInfo = ({data}) => {
 					<h1 className="flex-auto text-xl font-semibold">{data.name}</h1>
 					<div className="w-full flex-none text-sm font-medium text-gray-500 mt-0">Restaurant</div>
 				</div>
-				<div className="flex items-baseline mt-4 mb-6">
+				<div className="mb-2 mt-2">
 					<div className="text-sm font-medium text-gray-500">
-						<div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-							<table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-								<thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-									<tr>
-										<th scope="col" className="px-10 py-1">Day</th>
-										<th scope="col" className="px-10 py-1">Opening Time</th>
-										<th scope="col" className="px-10 py-1">Closing Time</th>
+						<div className="relative overflow-x-auto shadow-md sm:rounded-lg ">
+							<table className="w-full text-sm text-left text-gray-500 dark:text-gray-400 w-full">
+								<thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 text-center">
+									<tr className="text-center">
+										<th scope="col" className="px-5 py-1">Day</th>
+										<th scope="col" className="px-5 py-1">Opening Time</th>
+										<th scope="col" className="px-5 py-1">Closing Time</th>
 									</tr>
 								</thead>
 								<tbody>
 									{
 										res.map((item, index) => {
 											return (
-											<tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700" key={index}>
-												<td scope="row" className="px-14 py-1 font-medium text-gray-900 dark:text-white whitespace-nowrap">{item.days.length>1 ? item.days[0] + " - " + item.days[item.days.length-1] : item.days[0]}</td>
-												<td className="px-14 py-1">{modify12HourFormat(item.opening_time)}</td>
-												<td className="px-14 py-1">{modify12HourFormat(item.closing_time)}</td>
+											<tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 text-center" key={index}>
+												<td scope="row" className="px-5 py-1 font-medium text-gray-900 dark:text-white whitespace-nowrap">{item.days.length>1 ? item.days[0] + " - " + item.days[item.days.length-1] : item.days[0]}</td>
+												<td className="px-5 py-1">{modify12HourFormat(item.opening_time)}</td>
+												<td className="px-5 py-1">{modify12HourFormat(item.closing_time)}</td>
 											</tr>
 											)
 										})

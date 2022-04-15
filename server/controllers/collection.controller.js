@@ -179,7 +179,7 @@ exports.collectionRestaurantController = async(req, res) => {
             if(a.length != 0){
                 return res.status(200).json({
                     success: true,
-                    msg: "Restaurant already in collection"
+                    msg: "Restaurant already in this collection"
 
                 });
             }
