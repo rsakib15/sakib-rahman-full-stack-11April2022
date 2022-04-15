@@ -151,7 +151,7 @@ const App = (props) => {
 						<SearchBox name={name} onChange={handleSearchBoxChange}/>
 						<TimePicker time={time} onChange={handleTimeChange}/>
 						<div className="flex-auto flex space-x-3 mt-5">
-							<button className="lg:w-1/2 flex items-center justify-center w-9 h-9 rounded-md bg-black text-white" onClick={()=>handleSearch()}>SEARCH</button>
+							<button className="lg:w-1/2 flex items-center justify-center w-9 h-9 rounded-md bg-gray-800 hover:bg-gray-700 text-white" onClick={()=>handleSearch()}>SEARCH</button>
 							<button className="lg:w-1/2 flex items-center justify-center w-9 h-9 rounded-md bg-slate-100 text-black" onClick={()=>handleReset()}>RESET</button>
 						</div>
 

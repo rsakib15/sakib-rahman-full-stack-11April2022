@@ -78,7 +78,7 @@ const RestaurantCardInfo = ({data}) => {
 				</div>
 				<div className="flex space-x-3 mb-4 text-sm font-medium">
 					<div className="flex-auto flex space-x-3">
-						<button onClick={handleDrawer} className="lg:w-full flex items-center justify-center w-9 h-9 rounded-md bg-black text-white" type="submit">Add to Collection</button>
+						<button onClick={handleDrawer} className="lg:w-full flex items-center justify-center w-9 h-9 rounded-md bg-gray-800 hover:bg-gray-700 text-white" type="submit">Add to Collection</button>
 					</div>
 				</div>
 			</div>

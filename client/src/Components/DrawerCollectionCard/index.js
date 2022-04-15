@@ -91,7 +91,7 @@ const DrawerCollectionCard = ({restaurant_id}) => {
                                                             <p className="text-sm text-gray-500 truncate dark:text-gray-400">{collection.description}</p>
                                                         </div>
                                                         <div onClick={()=>handleAddCollection(collection.id)}>
-                                                            <button class="flex items-center justify-center w-14 h-9 rounded-md bg-black text-white" type="submit">
+                                                            <button class="flex items-center justify-center w-14 h-9 rounded-md bg-gray-800 hover:bg-gray-700 text-white" type="submit">
                                                                 Add
                                                             </button>
                                                         </div>

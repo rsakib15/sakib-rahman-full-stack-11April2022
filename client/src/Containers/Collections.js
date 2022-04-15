@@ -102,7 +102,7 @@ const Collections = (props) => {
                     localStorage.getItem('token') ? <div className="w-full">
                     <div className="flex flex-wrap space-x-reverse justify-between">
                         <h2 className="mb-4 text-2xl text-gray-600 font-bold md:text-3xl">Collections</h2>
-                        <button onClick={() => handleModal()} className="lg:w-1/6 flex items-center justify-center w-8 h-8 rounded-md bg-gray-800 text-white p-5" type="submit">
+                        <button onClick={() => handleModal()} className="lg:w-1/6 flex items-center justify-center w-8 h-8 rounded-md bg-gray-800 hover:bg-gray-700 text-white p-5" type="submit">
                             <PlusCircleIcon className="h-6 w-6 cursor-pointer mx-2 text-white" />Add New
                         </button>
                     </div>
