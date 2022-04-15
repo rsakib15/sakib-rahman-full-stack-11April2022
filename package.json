@@ -7,7 +7,8 @@
     "start": "node server/server.js",
     "backend": "nodemon server/server.js",
     "frontend": "npm run start --prefix client",
-    "dev": "concurrently \"npm run backend\" \"npm run start --prefix client\""
+    "dev": "concurrently \"npm run backend\" \"npm run start --prefix client\"",
+    "heroku-postbuild": "cd client && npm install && npm install --only=dev --no-shirnkwrap npm run build"
   },
   "keywords": [
     "Glints"
